@@ -1,27 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { FileText, Loader2, Sparkles } from "lucide-react";
 
-export default function Summarize({ file }) {
-  const [summary, setSummary] = useState(null);
+export default function Summarize({ fileUrl, options }) {
+  const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Reset summary when file changes
+  useEffect(() => {
+    setSummary("");
+  }, [fileUrl]);
+
   const generateSummary = async () => {
-    if (!file) return;
+    if (!fileUrl) return;
     setLoading(true);
-    setSummary(null);
-
-    const formData = new FormData();
-    formData.append("file", file);
-
+    setSummary("");
     try {
-      const res = await fetch("/api/summarize", {
+      const res = await fetch("/api/v1/summarize", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileUrl, options }),
       });
 
       const data = await res.json();
-      setSummary(data.summary);
+      if (!data.ok) {
+        setSummary("❌ " + (data.error || "Failed to generate summary."));
+      } else {
+        setSummary(data.summary + "\n");
+      }
     } catch (err) {
       console.error("Error:", err);
       setSummary("❌ Failed to generate summary.");
@@ -30,31 +37,51 @@ export default function Summarize({ file }) {
     }
   };
 
-  if (!file) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-gray-500">Please upload a file to generate a summary.</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col items-center justify-start p-8 h-full">
-      <button
-        className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 disabled:bg-gray-400"
-        onClick={generateSummary}
-        disabled={loading}
-      >
-        {loading ? "Generating..." : "Generate Summary"}
-      </button>
+    <div className="flex flex-col h-full w-[80%] p-6 bg-gray-700/10 rounded-2xl shadow-lg">
+      {/* Header */}
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <FileText className="text-blue-600" />
+        <h2 className="text-xl font-semibold">Document Summary</h2>
+      </div>
 
-      {/* Summary */}
-      {summary && (
-        <div className="mt-6 w-full max-w-2xl p-4 bg-gray-100 rounded-lg text-sm text-gray-800">
-          <h3 className="font-semibold mb-2">📄 Summary:</h3>
-          <p>{summary}</p>
-        </div>
-      )}
+      {/* Scrollable summary box */}
+      <div className="flex scrollbar-hidden border rounded-lg p-5 bg-gray-200/10 text-gray-200 whitespace-pre-wrap h-64 overflow-y-auto outline-none">
+        {summary ? (
+          summary
+        ) : (
+          <span className="text-gray-400 italic">
+            {fileUrl
+              ? "Click Generate to summarize your document..."
+              : "Upload a file to enable summarization."}
+          </span>
+        )}
+      </div>
+
+      {/* Action Button */}
+      <div className="mt-4 flex justify-end">
+        <button
+          onClick={generateSummary}
+          disabled={!fileUrl || loading}
+          className={`flex items-center gap-2 px-5 py-2 rounded-lg font-medium transition ${
+            !fileUrl || loading
+              ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+              : "bg-blue-600 text-white hover:bg-blue-700"
+          }`}
+        >
+          {loading ? (
+            <>
+              <Loader2 className="animate-spin w-4 h-4" />
+              Generating...
+            </>
+          ) : (
+            <>
+              <Sparkles className="w-4 h-4" />
+              Generate
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 }
