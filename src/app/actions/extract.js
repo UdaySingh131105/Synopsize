@@ -26,9 +26,9 @@ export async function extractTextAction(fileUrl) {
 
 
     if (isImage) {
-      console.log('in image');
       const formData = new FormData();
       formData.append('apikey', process.env.OCR_SPACE_API_KEY)
+      formData.append('url', fileUrl)
       const ocrRes = await fetch(`${process.env.BACKEND_OCR_ENDPOINT}`, {
         method: 'POST',
         body: formData,
