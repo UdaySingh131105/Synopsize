@@ -1,5 +1,5 @@
 "use server"
-import Tesseract from "tesseract.js";
+import { createWorker } from "tesseract.js";
 
 export async function extractTextAction(fileUrl) {
   try {
@@ -28,10 +28,9 @@ export async function extractTextAction(fileUrl) {
 
 
     if (isImage) {
-      const { data: { text } } = await Tesseract.recognize(fileUrl, "eng", {
-        workerPath: '/tesseract/worker.min.js',
-        corePath: '/tesseract/tesseract-core.wasm.js'
-      });
+      const worker = await createWorker('eng')
+      const { data: { text } } = await worker.recognize(fileUrl);
+      await worker.terminate()
       return { ok: true, text: text || "" };
     }
 
