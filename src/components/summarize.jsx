@@ -7,7 +7,6 @@ export default function Summarize({ fileUrl, options }) {
   const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Reset summary when file changes
   useEffect(() => {
     setSummary("");
   }, [fileUrl]);

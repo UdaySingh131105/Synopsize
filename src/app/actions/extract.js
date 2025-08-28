@@ -29,21 +29,16 @@ export async function extractTextAction(fileUrl) {
       const formData = new FormData();
       formData.append('apikey', process.env.OCR_SPACE_API_KEY)
       formData.append('url', fileUrl)
-      console.log(fileUrl, ' fileUrl');
       const ocrRes = await fetch(`${process.env.BACKEND_OCR_ENDPOINT}`, {
         method: 'POST',
         body: formData,
       })
 
-      console.log(ocrRes, ' res');
-
       if(!ocrRes.ok) {
-        return {ok: false, text: ""}
+        return {ok: false, text: "", message: ocrRes}
       }
       const data = await ocrRes.json()
-      console.log(data, ' data');
       const text = data.ParsedResults[0].ParsedText
-      console.log(text, ' text');
       return { ok: true, text: text || "" };
     }
 

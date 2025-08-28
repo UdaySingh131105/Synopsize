@@ -43,7 +43,6 @@ export default function UploadFiles({ onFileSelect }) {
     return <FileText className="w-5 h-5 text-gray-600" />;
   };
 
-  // --- Drag and Drop Handlers ---
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsDragging(true);

@@ -18,7 +18,6 @@ export async function POST(req) {
       );
     }
 
-    // Extract text from Cloudinary file URL
     const extracted = await extractTextAction(fileUrl);
     if (!extracted.ok || !extracted.text || extracted.text.trim().length === 0) {
       return NextResponse.json(
@@ -27,7 +26,6 @@ export async function POST(req) {
       );
     }
 
-    // Summarize with OpenAI
     const summary = await summarizeWithOpenAIAction(extracted.text, promptOptions);
     if (!summary.ok) {
       return NextResponse.json(summary, { status: 502 });

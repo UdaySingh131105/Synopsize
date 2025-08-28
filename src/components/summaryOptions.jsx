@@ -17,7 +17,6 @@ export default function SummaryOptions({ onOptionsChange }) {
     <div className="mt-4 p-4 w-full bg-gray-700/10 rounded-xl shadow">
       <h3 className="text-lg text-center font-semibold mb-3">Summary Options</h3>
 
-      {/* Length selector */}
       <div className="mb-3">
         <label className="block text-sm mb-1">Length</label>
         <select
@@ -31,7 +30,7 @@ export default function SummaryOptions({ onOptionsChange }) {
         </select>
       </div>
 
-      {/* Tone selector */}
+
       <div className="mb-3">
         <label className="block text-sm mb-1">Tone</label>
         <select
