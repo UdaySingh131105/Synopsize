@@ -10,7 +10,7 @@ export default function SummaryOptions({ onOptionsChange }) {
     const updated = { length, tone, [field]: value };
     setLength(updated.length);
     setTone(updated.tone);
-    onOptionsChange(updated); // pass options up to parent
+    onOptionsChange(updated);
   };
 
   return (

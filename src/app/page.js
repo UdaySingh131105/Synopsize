@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import UploadFiles from "@/components/uploadFiles";   // make sure filename matches
-import Summarize from "@/components/summarize";       // same here
+import UploadFiles from "@/components/uploadFiles";  
+import Summarize from "@/components/summarize";    
 import SummaryOptions from "@/components/summaryOptions";
 
 export default function Home() {

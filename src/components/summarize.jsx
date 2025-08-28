@@ -25,13 +25,13 @@ export default function Summarize({ fileUrl, options }) {
 
       const data = await res.json();
       if (!data.ok) {
-        setSummary("❌ " + (data.error || "Failed to generate summary."));
+        setSummary((data.error || "Failed to generate summary."));
       } else {
         setSummary(data.summary + "\n");
       }
     } catch (err) {
       console.error("Error:", err);
-      setSummary("❌ Failed to generate summary.");
+      setSummary("Failed to generate summary.");
     } finally {
       setLoading(false);
     }

@@ -14,9 +14,8 @@ export default function UploadFiles({ onFileSelect }) {
       const formData = new FormData();
       formData.append("file", selected);
       formData.append("summaryLength", summaryLength);
-
       const uploadRes = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/upload/cloud`,
+        `/api/v1/upload/cloud`,
         {
           method: "POST",
           body: formData,
