@@ -28,7 +28,10 @@ export async function extractTextAction(fileUrl) {
 
 
     if (isImage) {
-      const { data: { text } } = await Tesseract.recognize(fileUrl, "eng");
+      const { data: { text } } = await Tesseract.recognize(fileUrl, "eng", {
+        workerPath: '/tesseract/worker.min.js',
+        corePath: '/tesseract/tesseract-core.wasm.js'
+      });
       return { ok: true, text: text || "" };
     }
 
