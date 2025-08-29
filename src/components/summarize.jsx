@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FileText, Loader2, Sparkles, ClipboardCopy, Check, Code2 } from "lucide-react";
 
 export default function Summarize({ fileUrl, options }) {
-  const [summary, setSummary] = useState("");      // raw HTML from API
+  const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const summaryRef = useRef(null);
