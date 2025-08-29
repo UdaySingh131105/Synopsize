@@ -27,10 +27,11 @@ export async function summarizeWithOpenAIAction(inputText, opts = {}) {
     if (opts.focusOn) customPrompts.push(`Focus especially on ${opts.focusOn}.`);
 
     const userPrompt =
-      `Summarize the following document.\n` +
+      `Summarize the following document in Markdown format.\n` +
       `${lengthInstruction}\n` +
       `${customPrompts.join("\n")}\n\n` +
       `Document:\n${text}`;
+
 
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",

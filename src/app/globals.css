@@ -32,3 +32,183 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.generatedSummary {
+  --text: #27233A;
+  --muted: #505168;
+  --accent: #B3C0A4;    
+  --border: rgba(39,35,58,0.08);
+  --code-bg: #f6f7f9;
+  --code-border: #e6e7ea;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+               "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.generatedSummary h1,
+.generatedSummary h2,
+.generatedSummary h3,
+.generatedSummary h4,
+.generatedSummary h5,
+.generatedSummary h6 {
+  color: var(--text);
+  margin: 1.2em 0 0.5em;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.generatedSummary h1 { font-size: 1.75rem; } /* ~28px */
+.generatedSummary h2 { font-size: 1.375rem; } /* ~22px */
+.generatedSummary h3 { font-size: 1.125rem; } /* ~18px */
+.generatedSummary h4 { font-size: 1rem; }
+.generatedSummary h5 { font-size: 0.95rem; }
+.generatedSummary h6 { font-size: 0.85rem; color: var(--muted); }
+
+.generatedSummary p {
+  margin: 0 0 1em;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.generatedSummary a {
+  color: #2a6ef2;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(42,110,242,0.12);
+  transition: color .15s ease, border-color .15s ease;
+}
+.generatedSummary a:hover,
+.generatedSummary a:focus {
+  color: #1b4ed6;
+  border-color: rgba(27,78,214,0.18);
+  text-decoration: none;
+  outline: none;
+}
+
+.generatedSummary ul,
+.generatedSummary ol {
+  margin: 0 0 1em 1.25em;
+  padding: 0;
+}
+.generatedSummary ul li {
+  list-style-type: disc;
+  margin: 0.35em 0;
+}
+.generatedSummary ol {
+  list-style-position: outside;
+}
+.generatedSummary ol li {
+  margin: 0.35em 0;
+}
+
+.generatedSummary li ul,
+.generatedSummary li ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.generatedSummary blockquote {
+  margin: 0 0 1em;
+  padding: 0.6em 1em;
+  border-left: 4px solid var(--accent);
+  background: rgba(179,192,164,0.06);
+  color: var(--muted);
+  font-style: italic;
+  border-radius: 6px;
+}
+
+.generatedSummary code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  background: var(--code-bg);
+  padding: 0.12em 0.35em;
+  border-radius: 6px;
+  border: 1px solid var(--code-border);
+  font-size: 0.9em;
+  color: #c6336c;
+}
+
+.generatedSummary pre {
+  margin: 0 0 1em;
+  padding: 0.9em 1em;
+  overflow: auto;
+  background: #0b1220;
+  color: #e6edf3;
+  border-radius: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.generatedSummary table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1em;
+  font-size: 0.95rem;
+}
+.generatedSummary th,
+.generatedSummary td {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.generatedSummary th {
+  background: rgba(80,81,104,0.04);
+  font-weight: 600;
+}
+
+.generatedSummary img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5em 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.generatedSummary hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 1.25em 0;
+}
+
+.generatedSummary small {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.generatedSummary dl { margin: 0 0 1em; }
+.generatedSummary dt { font-weight: 600; margin-top: .5em; }
+.generatedSummary dd { margin-left: 1em; margin-bottom: .5em; color: var(--muted); }
+
+.generatedSummary :focus { outline: 3px solid rgba(42,110,242,0.18); outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .generatedSummary {
+    font-size: 15px;
+  }
+  .generatedSummary h1 { font-size: 1.5rem; }
+  .generatedSummary h2 { font-size: 1.125rem; }
+}
+
+.generatedSummary.compact p,
+.generatedSummary.compact li {
+  margin-bottom: 0.5em;
+}
+
+@media print {
+  .generatedSummary {
+    color: #000;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+  }
+  .generatedSummary pre { background: #f5f5f5; color: #111; }
+  .generatedSummary a::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #000; }
+}

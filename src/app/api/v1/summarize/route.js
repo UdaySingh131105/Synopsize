@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { extractTextAction } from "@/app/actions/extract";
 import { summarizeWithOpenAIAction } from "@/app/actions/summarize";
+import { marked } from "marked";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,8 +32,9 @@ export async function POST(req) {
       return NextResponse.json(summary, { status: 502 });
     }
 
+    const htmlSummary = marked(summary.summary)
     return NextResponse.json(
-      { ok: true, summary: summary.summary },
+      { ok: true, summary: htmlSummary },
       { status: 200 }
     );
   } catch (e) {
