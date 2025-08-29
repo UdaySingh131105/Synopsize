@@ -1,10 +1,11 @@
 import { FileHeart } from "lucide-react";
+import Link from "next/link";
 
 export default function NavBar() {
-    return <div className="p-4">
-        <div className="flex items-center gap-2">
+    return (
+        <Link href={'/'} className="p-4 flex gap-3 bg-[#27233A]">
             <FileHeart />
             <h1 className="font-semibold">Synopsize</h1>
-        </div>
-    </div>
+        </Link>
+    );
 }

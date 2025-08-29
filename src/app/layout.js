@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,7 @@ export const metadata = {
     title: "Synopsize – AI-Powered Text & PDF Summarizer",
     description:
       "Extract text from PDFs, images, and documents instantly with Synopsize. Get structured AI summaries for study, research, and productivity.",
-    url: "https://synopsize-six.vercel.app/", 
+    url: "https://synopsize-six.vercel.app/",
     siteName: "Synopsize",
     locale: "en_US",
     type: "website"
@@ -44,8 +45,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar />
-        {children}
+        <main className="w-full">
+          <NavBar />
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
