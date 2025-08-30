@@ -1,36 +1,212 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 📘 Synopsize - PDF Summarizer
 
-First, run the development server:
+A web application built with **Next.js** that allows users to upload PDF documents and generate concise summaries using **OpenAI**. The app supports both text extraction and OCR for scanned PDFs.
 
+#### Live Link - [Synopsize - AI-Powered Text & PDF Summarizer](https://synopsize-six.vercel.app/)
+---
+
+## 📑 Table of Contents
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Configuration](#environment-configuration)
+  - [Run the Development Server](#run-the-development-server)
+- [Usage](#-usage)
+- [Configuration](#-configuration)
+- [Scripts](#-scripts)
+- [API Reference](#-api-reference)
+- [Components](#-components)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## 🚀 Features
+- 📂 Upload **PDF and image files** for summarization  
+- 📖 Extract text from PDFs using **pdf-parse**  
+- 🔎 OCR support for scanned PDFs/images via **tesseract.js** or external **OCR API**  
+- 🤖 Summarize extracted text using **OpenAI API**  
+- ⚙️ Customizable summary options (**length, tone, focus**)  
+- 📱 Responsive UI with **Tailwind CSS**  
+- 📝 Markdown rendering for summaries  
+- ☁️ Cloud upload support via **Cloudinary**  
+
+---
+
+## 🛠 Tech Stack
+- **Frontend:** React, Next.js (App Router)  
+- **Styling:** Tailwind CSS  
+- **PDF Parsing:** pdf-parse  
+- **OCR:** tesseract.js, external OCR API  
+- **AI Summarization:** OpenAI API  
+- **Markdown Rendering:** marked  
+- **UI Components:** shadcn/ui  
+- **Icons:** lucide-react  
+- **Cloud Storage:** Cloudinary  
+
+---
+
+## 📂 Project Structure
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+├── .env                  # Environment variables
+├── components.json       # shadcn/ui config
+├── next.config.mjs       # Next.js config
+├── package.json
+├── postcss.config.mjs
+├── public/               # Static assets (SVGs, etc.)
+├── src/
+│   ├── app/
+│   │   ├── actions/      # Server actions (extract, summarize, upload)
+│   │   ├── api/
+│   │   │   └── v1/
+│   │   │       ├── summarize/route.js    # Summarization API
+│   │   │       ├── upload/route.js       # File upload API
+│   │   │       └── upload/cloud/route.js # Cloud upload API
+│   │   ├── components/   # React UI components
+│   │   ├── lib/          # Utility functions (cloudinary, file helpers)
+│   ├── summary/          # Summary page
+├── README.md
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ⚡ Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js >= 18
+- npm, yarn, pnpm, or bun
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Clone the repository:
+```bash
+git clone git@github.com:UdaySingh131105/Synopsize.git
+cd synposize
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Environment Configuration
+```bash
+OPENAI_API_KEY=your_openai_api_key
+OPENAI_SUMMARY_MODEL=gpt-4o-mini
+OCR_SPACE_API_KEY=your_ocr_api_key
+BACKEND_OCR_ENDPOINT=https://api.ocr.space/parse/image
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+```
+---
+### Run the Development Server
+```bash
+npm run dev
+```
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 💻 Usage
+
+1. Open the app in your browser → http://localhost:3000
+2. Upload a PDF or image file
+3. Choose summary options (length, tone, focus)
+4. Click Generate to get a Markdown summary
+5. Copy or download the summary as needed
+
+---
+
+## ⚙️ Configuration
+- Environment Variables: See .env section above
+- Cloudinary: Used for cloud file storage
+- OCR: Uses external API for image text extraction
+---
+
+## 📜 Scripts
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm run start   # Start production server
+```
+---
+
+## 📡 API Reference
+
+### 1. POST /api/v1/upload
+    - Description: Uploads a PDF or image file to the server.
+    - Request: multipart/form-data with field file
+    - Response:
+    ```json
+    { "ok": true, "url": "<file_url>" }
+    ```
+
+---
+
+### 2. POST /api/v1/upload/cloud
+    - Description: Uploads a file to Cloudinary.
+    - Request: multipart/form-data with field file
+    - Response:
+    ```json
+    { "url": "<cloudinary_url>" }
+    ```
+
+---
+
+### 3. POST /api/v1/summarize
+    - Description: Summarizes the text content of a file.
+    - Request:
+    ```json
+    {
+        "fileUrl": "string",
+        "options": { 
+            "length": "short|medium|long", 
+            "tone": "neutral|formal|casual", 
+            "focusOn": "optional focus" 
+        }
+    }
+    ```
+    - Response:
+    ```json
+    { "ok": true, "summary": "<markdown_html>" }
+    ```
+---
+
+## 🧩 Components
+
+- navbar.jsx → Top navigation bar
+- footer.jsx → Footer section
+- uploadFiles.jsx → File upload UI
+- summarize.jsx → Summary generation UI
+- summaryOptions.jsx → Options for summary customization
+- ui/button.jsx → Reusable button component
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+
+2. Create your feature branch:
+```bash
+git checkout -b feature/fooBar
+```
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+---
