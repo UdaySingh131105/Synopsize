@@ -92,7 +92,7 @@ export default function Summarize({ fileUrl, options }) {
           onClick={generateSummary}
           disabled={!fileUrl || loading}
           className="flex items-center gap-2 rounded-lg px-5 py-2 font-medium transition
-                     bg-[#27233A] text-[#EAEFD3] hover:bg-[#505168]
+                     bg-[#27233A] text-[#EAEFD3] hover:bg-[#505168] cursor-pointer
                      disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-[#27233A]"
         >
           {loading ? (
