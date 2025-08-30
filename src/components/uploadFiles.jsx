@@ -94,7 +94,7 @@ export default function UploadFiles({ onFileSelect }) {
             <>
               <div className="flex flex-col items-center justify-center gap-2">
                 <UploadIcon size={50} className="" />
-                <p className="">
+                <p className="text-center">
                   {isDragging ? "Drop file here" : "Click or drag & drop PDF/Image"}
                 </p>
                 <input
@@ -112,13 +112,13 @@ export default function UploadFiles({ onFileSelect }) {
           {file && (
             <div className="flex flex-col items-center justify-center gap-2">
               {getFileIcon()}
-              <span>{file.name}</span>
+              <span className="text-center">{file.name}</span>
               <button
                 onClick={handleRemove}
                 className="text-sm text-red-500 hover:underline flex items-center space-x-1 cursor-pointer"
               >
                 <X size={12} />
-                <span>Remove file</span>
+                <span className="text-center">Remove file</span>
               </button>
             </div>
           )}
