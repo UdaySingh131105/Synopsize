@@ -148,43 +148,82 @@ npm run start   # Start production server
 
 ## 📡 API Reference
 
-### 1. POST /api/v1/upload
-    - Description: Uploads a PDF or image file to the server.
-    - Request: multipart/form-data with field file
-    - Response:
-    ```json
-    { "ok": true, "url": "<file_url>" }
-    ```
+### 1. **Upload File**
+**Endpoint:** `POST /api/v1/upload`  
 
+- **Description:** Uploads a PDF or image file to the server.  
+- **Request:** `multipart/form-data` with field `file`  
+- **Response:**
+```json
+{
+  "ok": true,
+  "url": "<file_url>"
+}
+```
 ---
 
-### 2. POST /api/v1/upload/cloud
-    - Description: Uploads a file to Cloudinary.
-    - Request: multipart/form-data with field file
-    - Response:
-    ```json
-    { "url": "<cloudinary_url>" }
-    ```
+### 2. **Upload File to Cloudinary**
 
+**Endpoint:**  `POST /api/v1/upload/cloud`
+
+**Description:**  Uploads a file to **Cloudinary**.
+
+**Request:**  
+- Content-Type: `multipart/form-data`  
+- Field: `file`
+
+**Example cURL Request:**
+```bash
+curl -X POST http://localhost:3000/api/v1/upload/cloud \
+  -F "file=@/path/to/your/file.pdf"
+```
+
+- **Response:**
+```json
+{
+  "url": "<cloudinary_url>"
+}
+```
 ---
 
-### 3. POST /api/v1/summarize
-    - Description: Summarizes the text content of a file.
-    - Request:
-    ```json
-    {
-        "fileUrl": "string",
-        "options": { 
-            "length": "short|medium|long", 
-            "tone": "neutral|formal|casual", 
-            "focusOn": "optional focus" 
+### 3. **Summarize File**
+
+**Endpoint:**  `POST /api/v1/summarize`
+
+**Description:**  Summarizes the text content of a file using AI.
+
+**Request Body:**
+```json
+{
+  "fileUrl": "string",
+  "options": { 
+    "length": "short|medium|long", 
+    "tone": "neutral|formal|casual", 
+    "focusOn": "optional focus"
+  }
+}
+```
+**Example cURL Request:**
+```bash
+curl -X POST http://localhost:3000/api/v1/summarize \
+  -H "Content-Type: application/json" \
+  -d '{
+        "fileUrl": "https://example.com/sample.pdf",
+        "options": {
+          "length": "medium",
+          "tone": "neutral",
+          "focusOn": "introduction"
         }
-    }
-    ```
-    - Response:
-    ```json
-    { "ok": true, "summary": "<markdown_html>" }
-    ```
+      }'
+
+```
+- **Response:**
+```json
+{
+  "ok": true,
+  "summary": "<markdown_html>"
+}
+```
 ---
 
 ## 🧩 Components
