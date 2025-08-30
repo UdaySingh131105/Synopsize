@@ -249,3 +249,17 @@ git checkout -b feature/fooBar
 4. Push to the branch
 5. Create a Pull Request
 ---
+
+## 📬 Contact / Author
+
+**Author:** Uday Singh  
+
+- **GitHub:** [UdaySingh131105](https://github.com/UdaySingh131105)  
+- **Email:** [udaysingh131105@gmail.com](mailto:udaysingh131105@gmail.com)  
+
+If you’d like to report issues or request features, please open an issue on the GitHub repository:  
+👉 [Synopsize Issues](https://github.com/UdaySingh131105/Synopsize/issues)
+
+---
+
+© 2025 **Synposize**. All rights reserved.
